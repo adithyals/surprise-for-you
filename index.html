@@ -117,7 +117,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
     <div class="ptext">
       <div class="happy">Happy</div>
       <div class="bday">BIRTHDAY</div>
-      <div class="pname" id="pname">Rashmitha</div>
+      <div class="pname" id="pname">Gurl</div>
       <button class="btn pbtn" id="next2">Continue 💌</button>
     </div>
   </div>
@@ -160,6 +160,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 const CONFIG = {
   // ----- Birthday poster page (page 2) -----
   posterMain: "images/main.png",   // her main photo. A transparent PNG cut-out gets the white sticker outline automatically
+  posterTag: "Gurl",               // text under BIRTHDAY on the poster page
   posterCutout: true,              // true = add the white sticker outline (main.png is a transparent cut-out). false = rounded photo frame
   posterBg: ["images/bg1.jpg","images/bg2.jpg","images/bg3.jpg"],   // 3 photos shown blurred in the background
   herName: "Rashmitha",        // her name
@@ -199,7 +200,7 @@ const fill = s => s.replaceAll("{her}",CONFIG.herName).replaceAll("{you}",CONFIG
 const go = n => { document.querySelectorAll("section").forEach(s=>s.classList.remove("active")); $("s"+n).classList.add("active"); window.scrollTo(0,0); };
 
 $("introTitle").textContent = "Hey " + CONFIG.herName + " 😊";
-$("pname").textContent = CONFIG.herName;
+$("pname").textContent = CONFIG.posterTag;
 $("finalTitle").textContent = "Happy Birthday, " + CONFIG.herName + "!";
 $("finalMsg").textContent = fill(CONFIG.finalMessage);
 

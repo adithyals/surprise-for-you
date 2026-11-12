@@ -41,6 +41,10 @@ button.btn:hover{transform:scale(1.07)}
 @media(max-width:600px){section:not(#s2){padding-top:92px;padding-bottom:96px}}
 @media(min-width:601px){.d.bln{top:24%}}
 
+.env{width:min(66vw,320px);height:auto;cursor:pointer;margin-bottom:10px;filter:drop-shadow(0 14px 22px rgba(80,40,30,.35));animation:envbeat 1.8s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+@keyframes envbeat{0%,100%{transform:scale(1) rotate(-1.5deg)}50%{transform:scale(1.06) rotate(1.5deg)}}
+.mini-env{width:34px;height:auto;vertical-align:middle;margin-left:6px;position:relative;top:-1px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+@media(prefers-reduced-motion:reduce){.env{animation:none}}
 /* ===== POSTER PAGE ===== */
 #s2{padding:16px}
 .poster{position:relative;width:min(100%,440px);height:min(calc(100vh - 32px),800px);border-radius:28px;overflow:hidden;background:#f3d6c3;box-shadow:0 25px 70px rgba(80,50,40,.35)}
@@ -168,7 +172,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 
 <!-- 1. INTRO -->
 <section id="s1" class="active">
-  <div class="heart-big" id="open">💌</div>
+  <img class="env" id="open" src="images/envelope.png" alt="Sealed envelope. Tap to open" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'heart-big',id:'open',textContent:'💌'}));bindOpen()">
   <h1 id="introTitle">Hey 😊</h1>
   <p class="sub">I made something special just for you. Tap the envelope to open it.</p>
 </section>
@@ -198,7 +202,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
       <div class="happy">Happy</div>
       <div class="bday">BIRTHDAY</div>
       <div class="pname" id="pname">Gurl</div>
-      <button class="btn pbtn" id="next2">Continue 💌</button>
+      <button class="btn pbtn" id="next2">Continue <img class="mini-env" src="images/envelope.png" alt="" onerror="this.replaceWith('💌')"></button>
     </div>
   </div>
 </section>
@@ -338,7 +342,8 @@ function isCutout(img){
 })();
 
 /* step 1 -> 2 */
-$("open").onclick=()=>{ if(CONFIG.song) song.play().catch(()=>{}); burst(120); go(2); };
+function bindOpen(){ $("open").onclick=()=>{ if(CONFIG.song) song.play().catch(()=>{}); burst(120); go(2); }; }
+bindOpen();
 $("next2").onclick=()=>{ go(3); type(); };
 
 /* typewriter */

@@ -41,10 +41,23 @@ button.btn:hover{transform:scale(1.07)}
 @media(max-width:600px){section:not(#s2){padding-top:92px;padding-bottom:96px}}
 @media(min-width:601px){.d.bln{top:24%}}
 
-.env{width:min(32vw,120px);height:auto;cursor:pointer;margin-bottom:10px;filter:drop-shadow(0 14px 22px rgba(80,40,30,.35));animation:envbeat 1.8s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
-@keyframes envbeat{0%,100%{transform:scale(1) rotate(-1.5deg)}50%{transform:scale(1.06) rotate(1.5deg)}}
+.env-wrap{position:relative;display:inline-block;margin-bottom:12px}
+.env-wrap::before{content:"";position:absolute;left:50%;top:50%;width:260%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,206,160,.8),rgba(255,206,160,.28) 40%,rgba(255,206,160,0) 68%);animation:glow 2.6s ease-in-out infinite;pointer-events:none;z-index:0}
+@keyframes glow{50%{transform:translate(-50%,-50%) scale(1.18);opacity:.65}}
+.env{position:relative;z-index:1;display:block;width:min(32vw,120px);height:auto;cursor:pointer;filter:drop-shadow(0 12px 18px rgba(80,40,30,.38));animation:envpop .9s cubic-bezier(.2,1.5,.4,1) both,envbeat 2.2s ease-in-out .9s infinite;-webkit-tap-highlight-color:transparent;transition:filter .3s}
+.env:hover{filter:drop-shadow(0 14px 22px rgba(142,34,50,.5)) brightness(1.05)}
+@keyframes envpop{0%{opacity:0;transform:scale(.2) rotate(-14deg)}60%{opacity:1;transform:scale(1.22) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes envbeat{0%,100%{transform:scale(1) rotate(-2deg)}35%{transform:scale(1.1) rotate(2deg)}55%{transform:scale(1.03) rotate(0)}}
+.env.opening{animation:envopen .8s ease-in forwards}
+@keyframes envopen{0%{transform:scale(1)}18%{transform:scale(1.15) rotate(-10deg)}36%{transform:scale(1.2) rotate(10deg)}54%{transform:scale(1.3) rotate(-5deg)}100%{transform:scale(3.2) translateY(-30px);opacity:0}}
+.env-wrap.opening::before{animation:flash .8s ease-out forwards}
+@keyframes flash{0%{opacity:.8}60%{transform:translate(-50%,-50%) scale(1.8);opacity:1}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
+.sprk{position:absolute;z-index:2;font-size:1.25rem;pointer-events:none;animation:twinkle2 2.4s ease-in-out infinite}
+@keyframes twinkle2{0%,100%{opacity:.25;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(18deg)}}
+#s1 p.sub{animation:hint 2.4s ease-in-out infinite}
+@keyframes hint{50%{opacity:.45}}
 .mini-env{width:34px;height:auto;vertical-align:middle;margin-left:6px;position:relative;top:-1px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
-@media(prefers-reduced-motion:reduce){.env{animation:none}}
+@media(prefers-reduced-motion:reduce){.env,.env-wrap::before,.sprk,#s1 p.sub{animation:none}.env.opening{animation:none;opacity:0}}
 /* ===== POSTER PAGE ===== */
 #s2{padding:16px}
 .poster{position:relative;width:min(100%,440px);height:min(calc(100vh - 32px),800px);border-radius:28px;overflow:hidden;background:#f3d6c3;box-shadow:0 25px 70px rgba(80,50,40,.35)}
@@ -172,7 +185,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 
 <!-- 1. INTRO -->
 <section id="s1" class="active">
-  <img class="env" id="open" src="images/envelope.png" alt="Sealed envelope. Tap to open" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'heart-big',id:'open',textContent:'💌'}));bindOpen()">
+  <div class="env-wrap"><img class="env" id="open" src="images/envelope.png" alt="Sealed envelope. Tap to open" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'heart-big',id:'open',textContent:'💌'}));bindOpen()"><span class="sprk" style="left:-14%;top:2%">✨</span><span class="sprk" style="right:-12%;top:-6%;animation-delay:.7s;font-size:1.4rem">✨</span><span class="sprk" style="right:-16%;bottom:6%;animation-delay:1.3s;font-size:1rem">💫</span><span class="sprk" style="left:-10%;bottom:-4%;animation-delay:1.9s;font-size:1.2rem">✨</span><span class="sprk" style="left:44%;top:-22%;animation-delay:.3s;font-size:1.1rem">🤍</span></div>
   <h1 id="introTitle">Hey 😊</h1>
   <p class="sub">I made something special just for you. Tap the envelope to open it.</p>
 </section>
@@ -342,7 +355,14 @@ function isCutout(img){
 })();
 
 /* step 1 -> 2 */
-function bindOpen(){ $("open").onclick=()=>{ if(CONFIG.song) song.play().catch(()=>{}); burst(120); go(2); }; }
+let opening=false;
+function bindOpen(){ $("open").onclick=()=>{
+  if(opening) return; opening=true;
+  if(CONFIG.song) song.play().catch(()=>{});
+  $("open").classList.add("opening"); document.querySelector(".env-wrap").classList.add("opening");
+  setTimeout(()=>burst(160),380);
+  setTimeout(()=>go(2),820);
+}; }
 bindOpen();
 $("next2").onclick=()=>{ go(3); type(); };
 

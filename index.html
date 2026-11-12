@@ -42,6 +42,8 @@ button.btn:hover{transform:scale(1.07)}
 @media(min-width:601px){.d.bln{top:24%}}
 
 .env-wrap{position:relative;display:inline-block;margin-bottom:12px}
+.env-wrap::before{content:"";position:absolute;left:50%;top:50%;width:230%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,160,180,.75),rgba(244,170,190,.35) 40%,rgba(244,180,196,0) 68%);animation:blush 3s ease-in-out infinite;pointer-events:none;z-index:0}
+@keyframes blush{50%{transform:translate(-50%,-50%) scale(1.12);opacity:.75}}
 .env{position:relative;z-index:1;display:block;width:min(26vw,100px);height:auto;cursor:pointer;filter:drop-shadow(0 12px 18px rgba(80,40,30,.38));animation:envpop .9s cubic-bezier(.2,1.5,.4,1) both,envbeat 2.2s ease-in-out .9s infinite;-webkit-tap-highlight-color:transparent;transition:filter .3s}
 .env:hover{filter:drop-shadow(0 14px 22px rgba(142,34,50,.5)) brightness(1.05)}
 @keyframes envpop{0%{opacity:0;transform:scale(.2) rotate(-14deg)}60%{opacity:1;transform:scale(1.22) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
@@ -51,7 +53,7 @@ button.btn:hover{transform:scale(1.07)}
 #s1 p.sub{animation:hint 2.4s ease-in-out infinite}
 @keyframes hint{50%{opacity:.45}}
 .mini-env{width:34px;height:auto;vertical-align:middle;margin-left:6px;position:relative;top:-1px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
-@media(prefers-reduced-motion:reduce){.env,#s1 p.sub{animation:none}.env.opening{animation:none;opacity:0}}
+@media(prefers-reduced-motion:reduce){.env,.env-wrap::before,#s1 p.sub{animation:none}.env.opening{animation:none;opacity:0}}
 /* ===== POSTER PAGE ===== */
 #s2{padding:16px}
 .poster{position:relative;width:min(100%,440px);height:min(calc(100vh - 32px),800px);border-radius:28px;overflow:hidden;background:#f3d6c3;box-shadow:0 25px 70px rgba(80,50,40,.35)}

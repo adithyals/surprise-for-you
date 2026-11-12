@@ -31,10 +31,15 @@ button.btn:hover{transform:scale(1.07)}
 .pbg{position:absolute;inset:0;overflow:hidden}
 .bgp{position:absolute;overflow:hidden;background:linear-gradient(135deg,#f6cfb2,#e9a98a);filter:blur(5px);transform:scale(1.06);animation:drift 14s ease-in-out infinite alternate}
 .bgp img{width:100%;height:100%;object-fit:cover;display:block}
+.bgp img{filter:brightness(1.18) saturate(.85) contrast(.92)}
+.bgp.a img{object-position:32% 50%}
+.bgp.b img{object-position:45% 55%}
+.bgp.c img{object-position:28% 30%}
 .bgp.a{left:-14%;top:-3%;width:74%;height:58%}
 .bgp.b{right:-9%;top:6%;width:48%;height:38%;animation-delay:-4s;background:linear-gradient(135deg,#f9d9bd,#eebb9f)}
-.bgp.c{right:-11%;top:46%;width:54%;height:30%;animation-delay:-8s;background:linear-gradient(135deg,#f2dcc0,#e8b9a0)}
+.bgp.c{right:-11%;top:44%;width:54%;height:32%;animation-delay:-8s;background:linear-gradient(135deg,#f2dcc0,#e8b9a0)}
 @keyframes drift{to{transform:scale(1.12) translate(6px,-6px)}}
+.pbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,238,224,.38),rgba(255,226,206,.28))}
 .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.6) 1.4px,transparent 1.7px);background-size:9px 9px;opacity:.55;pointer-events:none}
 .main{position:absolute;left:50%;top:7%;transform:translateX(-50%);width:98%;height:67%;display:flex;align-items:flex-end;justify-content:center;animation:floaty 6s ease-in-out infinite}
 @keyframes floaty{50%{transform:translateX(-50%) translateY(-8px)}}
@@ -46,7 +51,7 @@ button.btn:hover{transform:scale(1.07)}
 .ph-main small{font-size:.8rem;font-family:'Playfair Display',serif;color:#fff;opacity:.9;padding:0 10px}
 .fade{position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(to top,#fff 40%,rgba(255,255,255,.92) 54%,rgba(255,255,255,0));pointer-events:none}
 .stk{position:absolute;z-index:3;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.18))}
-.stk.bf{left:3%;top:16%;width:27%;transform:rotate(-14deg);animation:flap 4s ease-in-out infinite}
+.stk.bf{left:5%;top:5%;width:24%;transform:rotate(-14deg);animation:flap 4s ease-in-out infinite}
 .stk.pl{right:0;top:34%;width:33%;opacity:.95;animation:bob 5s ease-in-out infinite}
 @keyframes flap{50%{transform:rotate(-6deg) translateY(-8px) scale(1.05)}}
 @keyframes bob{50%{transform:translateY(-10px) rotate(4deg)}}

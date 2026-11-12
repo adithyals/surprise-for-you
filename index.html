@@ -118,7 +118,23 @@ const CONFIG = {
   yourName: "Your Name",       // your name
   song: "song.mp3",            // put an mp3 next to index.html (optional). Leave "" for no music
   letter:
-``,   // TODO: add the little note here
+`Happy Birthday, Rashmitha! ❤️🎂
+
+I hope your special day is filled with endless smiles, beautiful surprises, and all the happiness your heart deserves.
+
+You are someone who makes ordinary moments feel a little more special just by being yourself. One thing I genuinely admire about you is how real and genuine you are. You never pretend to be someone else, and you always care about people's feelings. You have such a kind heart, and you never want to be the reason someone gets hurt. Never lose that beautiful part of yourself because it's one of the things that makes you truly special.
+
+I genuinely wish that life gives you countless reasons to smile, opportunities to achieve everything you've dreamed of, and people who always make you feel valued and appreciated.
+
+Never stop being the cheerful, crazy, unique, and wonderful person you are. Keep smiling, keep shining, and never let anything take away that beautiful happiness from you.
+
+May this new chapter of your life bring you more confidence, unforgettable memories, exciting adventures, and dreams turning into reality.
+
+And one thing I truly wish for you is that whenever you look back at this year, you have a thousand beautiful reasons to smile.
+
+Stay happy, stay blessed, and keep being YOU! ❤️
+
+Once again, a very Happy Birthday! 🥳✨`,
   reasons: [
     "From day one you've been the same. You never behaved fake with me",
     "You are so emotionally mature",
@@ -184,7 +200,10 @@ $("blow").onclick=()=>{
 function type(){
   const t=fill(CONFIG.letter);let i=0;$("typed").textContent="";
   if(!t.length){$("next3").style.display="inline-block";return}
-  const iv=setInterval(()=>{ $("typed").textContent+=t[i++]; if(i>=t.length){clearInterval(iv);$("next3").style.display="inline-block"} },45);
+  const chars=Array.from(t);
+  const finish=()=>{clearInterval(iv);$("typed").textContent=t;$("next3").style.display="inline-block"};
+  const iv=setInterval(()=>{ $("typed").textContent+=chars[i++]; if(i>=chars.length) finish() },22);
+  document.querySelector(".letter").onclick=finish;
 }
 $("next3").onclick=()=>go(4);
 

@@ -44,7 +44,7 @@ button.btn:hover{transform:scale(1.07)}
 .env-wrap{position:relative;display:inline-block;margin-bottom:12px}
 .env-wrap::before{content:"";position:absolute;left:50%;top:50%;width:260%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,206,160,.8),rgba(255,206,160,.28) 40%,rgba(255,206,160,0) 68%);animation:glow 2.6s ease-in-out infinite;pointer-events:none;z-index:0}
 @keyframes glow{50%{transform:translate(-50%,-50%) scale(1.18);opacity:.65}}
-.env{position:relative;z-index:1;display:block;width:min(32vw,120px);height:auto;cursor:pointer;filter:drop-shadow(0 12px 18px rgba(80,40,30,.38));animation:envpop .9s cubic-bezier(.2,1.5,.4,1) both,envbeat 2.2s ease-in-out .9s infinite;-webkit-tap-highlight-color:transparent;transition:filter .3s}
+.env{position:relative;z-index:1;display:block;width:min(24vw,90px);height:auto;cursor:pointer;filter:drop-shadow(0 12px 18px rgba(80,40,30,.38));animation:envpop .9s cubic-bezier(.2,1.5,.4,1) both,envbeat 2.2s ease-in-out .9s infinite;-webkit-tap-highlight-color:transparent;transition:filter .3s}
 .env:hover{filter:drop-shadow(0 14px 22px rgba(142,34,50,.5)) brightness(1.05)}
 @keyframes envpop{0%{opacity:0;transform:scale(.2) rotate(-14deg)}60%{opacity:1;transform:scale(1.22) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
 @keyframes envbeat{0%,100%{transform:scale(1) rotate(-2deg)}35%{transform:scale(1.1) rotate(2deg)}55%{transform:scale(1.03) rotate(0)}}

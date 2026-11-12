@@ -54,6 +54,7 @@ button.btn:hover{transform:scale(1.07)}
 @keyframes hint{50%{opacity:.45}}
 .mini-env{width:34px;height:auto;vertical-align:middle;margin-left:6px;position:relative;top:-1px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
 @media(prefers-reduced-motion:reduce){.env,.env-wrap::before,#s1 p.sub{animation:none}.env.opening{animation:none;opacity:0}}
+.bear{height:1.05em;width:auto;vertical-align:-.2em;margin-left:.08em;filter:drop-shadow(0 3px 5px rgba(120,60,60,.25))}
 /* ===== POSTER PAGE ===== */
 #s2{padding:16px}
 .poster{position:relative;width:min(100%,440px);height:min(calc(100vh - 32px),800px);border-radius:28px;overflow:hidden;background:#f3d6c3;box-shadow:0 25px 70px rgba(80,50,40,.35)}
@@ -292,7 +293,7 @@ const $ = id => document.getElementById(id);
 const fill = s => s.replaceAll("{her}",CONFIG.herName).replaceAll("{you}",CONFIG.yourName);
 const go = n => { document.querySelectorAll("section").forEach(s=>s.classList.remove("active")); $("s"+n).classList.add("active"); window.scrollTo(0,0); };
 
-$("introTitle").textContent = "Hey " + CONFIG.herName + " 😊";
+$("introTitle").innerHTML = "Hey " + CONFIG.herName + ` <img class="bear" src="images/bear.png" alt="" onerror="this.replaceWith('😊')">`;
 $("pname").textContent = CONFIG.posterTag;
 $("finalTitle").textContent = "Happy Birthday, " + CONFIG.herName + "!";
 $("finalMsg").textContent = fill(CONFIG.finalMessage);

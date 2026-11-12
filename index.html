@@ -35,7 +35,9 @@ button.btn:hover{transform:scale(1.07)}
 @keyframes sway{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
 .sp{position:fixed;z-index:0;pointer-events:none;width:16px;height:16px;animation:twinkle 3.2s ease-in-out infinite}
 @keyframes twinkle{50%{opacity:.35;transform:scale(.75)}}
-@media(prefers-reduced-motion:reduce){.d.bln,.sp{animation:none}}
+.cat{width:min(52vw,200px);height:auto;margin-bottom:8px;animation:hop 2.6s ease-in-out infinite;filter:drop-shadow(0 10px 14px rgba(106,21,36,.2))}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){.d.bln,.sp,.cat{animation:none}}
 @media(max-width:600px){section:not(#s2){padding-top:92px;padding-bottom:96px}}
 @media(min-width:601px){.d.bln{top:24%}}
 
@@ -225,7 +227,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 
 <!-- 6. FINAL -->
 <section id="s6">
-  <div class="heart-big">🎂</div>
+  <img class="cat" src="images/cat.png" alt="A kitten in a party hat holding a cake and tulips">
   <h1 id="finalTitle">Happy Birthday!</h1>
   <p class="final script" id="finalMsg"></p>
   <button class="btn" id="again" style="margin-top:30px">🎉 More confetti</button>

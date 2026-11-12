@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday ❤</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#1a0b2e;--bg2:#3b1450;--pink:#ff6b9d;--gold:#ffd27a;--text:#fff3f8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Playfair Display',serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2) 60%,#6a1b4d);background-attachment:fixed;min-height:100vh;overflow-x:hidden}
+.script{font-family:'Dancing Script',cursive}
+section{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative;z-index:2}
+section.active{display:flex;animation:fade 1s ease}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(2.4rem,9vw,4.5rem);font-family:'Dancing Script',cursive;color:var(--pink);text-shadow:0 0 30px rgba(255,107,157,.6)}
+h2{font-family:'Dancing Script',cursive;font-size:clamp(2rem,7vw,3rem);color:var(--gold);margin-bottom:24px}
+p.sub{opacity:.85;margin:14px 0 30px;font-size:1.1rem}
+button.btn{background:linear-gradient(135deg,#ff6b9d,#ff3d7f);color:#fff;border:none;padding:14px 34px;border-radius:50px;font-size:1.1rem;font-family:inherit;cursor:pointer;box-shadow:0 8px 30px rgba(255,61,127,.45);transition:transform .2s}
+button.btn:hover{transform:scale(1.07)}
+.heart-big{font-size:5rem;animation:beat 1.2s infinite;cursor:pointer;display:inline-block}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.float{position:fixed;bottom:-40px;z-index:1;pointer-events:none;animation:rise linear forwards}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+/* cake */
+.cake{position:relative;width:240px;margin:50px auto 20px}
+.layer{height:60px;border-radius:12px;margin:0 auto}
+.l1{width:240px;background:linear-gradient(#ff9ec0,#ff6b9d)}
+.l2{width:180px;background:linear-gradient(#ffe0ec,#ffb3cf);margin-top:-4px}
+.plate{width:290px;height:12px;background:#e9d5ff;border-radius:50%;margin:0 auto 0 -25px}
+.candles{display:flex;justify-content:center;gap:22px;position:absolute;top:-52px;left:0;right:0}
+.candle{width:10px;height:42px;background:repeating-linear-gradient(45deg,#fff,#fff 6px,#ff6b9d 6px,#ff6b9d 12px);border-radius:3px;position:relative}
+.flame{position:absolute;top:-24px;left:-3px;width:16px;height:24px;background:radial-gradient(ellipse at 50% 70%,#fff 10%,#ffd27a 45%,#ff7a2f 80%);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:flick .15s infinite alternate;box-shadow:0 0 25px 8px rgba(255,190,80,.6)}
+.out .flame{display:none}
+.out .candle::after{content:'';position:absolute;top:-30px;left:3px;width:4px;height:30px;background:rgba(255,255,255,.35);filter:blur(3px);animation:smoke 2s forwards}
+@keyframes flick{to{transform:scale(1.1,.92) rotate(3deg)}}
+@keyframes smoke{to{transform:translateY(-40px);opacity:0}}
+/* letter */
+.letter{max-width:640px;background:rgba(255,255,255,.07);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:34px 28px;font-size:1.2rem;line-height:1.9;text-align:left;min-height:260px;white-space:pre-wrap}
+.cursor{display:inline-block;width:2px;background:var(--pink);margin-left:2px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;max-width:900px;width:100%}
+.card{height:150px;perspective:800px;cursor:pointer}
+.card .in{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:16px;backface-visibility:hidden}
+.card .f{background:linear-gradient(135deg,#ff6b9d,#c13584);font-size:2.2rem}
+.card .b{background:rgba(255,255,255,.12);border:1px solid var(--gold);transform:rotateY(180deg);font-size:1rem;line-height:1.5}
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:960px;width:100%}
+.ph{aspect-ratio:3/4;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#ff6b9d55,#7b2cbf55);display:flex;align-items:center;justify-content:center;font-size:3rem;border:3px solid rgba(255,255,255,.85);box-shadow:0 10px 30px rgba(0,0,0,.35);transform:rotate(var(--r))}
+.ph img{width:100%;height:100%;object-fit:cover}
+.final{font-size:clamp(1.3rem,4vw,1.8rem);max-width:600px;line-height:1.7}
+.mute{position:fixed;top:14px;right:14px;z-index:10;background:rgba(255,255,255,.15);border:none;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:none}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<button class="mute" id="mute" title="Music on/off">🎵</button>
+
+<!-- 1. INTRO -->
+<section id="s1" class="active">
+  <div class="heart-big" id="open">💌</div>
+  <h1 id="introTitle">Hey 😊</h1>
+  <p class="sub">I made something special just for you. Tap the envelope to open it.</p>
+</section>
+
+<!-- 2. CAKE -->
+<section id="s2">
+  <h2 id="cakeTitle">Make a wish ✨</h2>
+  <div class="cake" id="cake">
+    <div class="candles" id="candles"></div>
+    <div class="layer l2"></div><div class="layer l1"></div><div class="plate"></div>
+  </div>
+  <p class="sub">Close your eyes, think of a wish, then tap the button to blow out the candles.</p>
+  <button class="btn" id="blow">Blow the candles 🎂</button>
+</section>
+
+<!-- 3. LETTER -->
+<section id="s3">
+  <h2>A little note for you 💌</h2>
+  <div class="letter"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
+  <button class="btn" id="next3" style="margin-top:28px;display:none">Keep going →</button>
+</section>
+
+<!-- 4. REASONS -->
+<section id="s4">
+  <h2>Reasons I like your character</h2>
+  <p class="sub">Tap each heart to flip it.</p>
+  <div class="cards" id="cards"></div>
+  <button class="btn" id="next4" style="margin-top:30px">Next →</button>
+</section>
+
+<!-- 5. GALLERY -->
+<section id="s5">
+  <h2>Our little moments 📸</h2>
+  <div class="gallery" id="gallery"></div>
+  <button class="btn" id="next5" style="margin-top:30px">One last thing →</button>
+</section>
+
+<!-- 6. FINAL -->
+<section id="s6">
+  <div class="heart-big">❤️</div>
+  <h1 id="finalTitle">Happy Birthday!</h1>
+  <p class="final script" id="finalMsg"></p>
+  <button class="btn" id="again" style="margin-top:30px">🎉 More confetti</button>
+</section>
+
+<audio id="song" loop preload="auto"></audio>
+
+<script>
+/* ========= EDIT THIS PART ========= */
+const CONFIG = {
+  herName: "Rashmitha",        // her name
+  yourName: "Your Name",       // your name
+  song: "song.mp3",            // put an mp3 next to index.html (optional). Leave "" for no music
+  letter:
+``,   // TODO: add the little note here
+  reasons: [
+    "From day one you've been the same. You never behaved fake with me",
+    "You are so emotionally mature",
+    "Even when my words or wishes hurt you, you treat me the right way"
+  ],
+  // put photos in an "images" folder and list them here, e.g. "images/1.jpg"
+  photos: ["images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg"],
+  finalMessage: "Stay the same wonderful person you are. Happy Birthday, {her}! 🎂"
+};
+/* ================================== */
+
+const $ = id => document.getElementById(id);
+const fill = s => s.replaceAll("{her}",CONFIG.herName).replaceAll("{you}",CONFIG.yourName);
+const go = n => { document.querySelectorAll("section").forEach(s=>s.classList.remove("active")); $("s"+n).classList.add("active"); window.scrollTo(0,0); };
+
+$("introTitle").textContent = "Hey " + CONFIG.herName + " 😊";
+$("finalTitle").textContent = "Happy Birthday, " + CONFIG.herName + "!";
+$("finalMsg").textContent = fill(CONFIG.finalMessage);
+
+/* floating hearts */
+setInterval(()=>{
+  const e=document.createElement("div");
+  e.className="float"; e.textContent=["💖","💗","💕","✨","🌸"][Math.floor(Math.random()*5)];
+  e.style.left=Math.random()*100+"vw"; e.style.fontSize=(14+Math.random()*22)+"px";
+  e.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(e); setTimeout(()=>e.remove(),12000);
+},500);
+
+/* music */
+const song=$("song");
+if(CONFIG.song){ song.src=CONFIG.song; $("mute").style.display="block"; }
+$("mute").onclick=()=>{ if(song.paused){song.play();$("mute").textContent="🎵"} else {song.pause();$("mute").textContent="🔇"} };
+
+/* confetti */
+const cv=$("confetti"),cx=cv.getContext("2d");let parts=[],running=false;
+const fit=()=>{cv.width=innerWidth;cv.height=innerHeight};fit();addEventListener("resize",fit);
+function burst(n=180){
+  for(let i=0;i<n;i++) parts.push({x:innerWidth/2,y:innerHeight/2.2,vx:(Math.random()-.5)*16,vy:Math.random()*-16-4,
+    s:5+Math.random()*7,c:`hsl(${Math.random()*360},90%,65%)`,r:Math.random()*6,vr:(Math.random()-.5)*.4});
+  if(!running){running=true;loop()}
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+    cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cx.restore()});
+  parts=parts.filter(p=>p.y<cv.height+20);
+  if(parts.length) requestAnimationFrame(loop); else {running=false;cx.clearRect(0,0,cv.width,cv.height)}
+}
+
+/* step 1 -> 2 */
+$("open").onclick=()=>{ if(CONFIG.song) song.play().catch(()=>{}); burst(80); go(2); };
+
+/* candles */
+for(let i=0;i<4;i++) $("candles").innerHTML+='<div class="candle"><div class="flame"></div></div>';
+$("blow").onclick=()=>{
+  $("cake").classList.add("out"); burst(220);
+  $("cakeTitle").textContent="Your wish will come true 💫";
+  $("blow").style.display="none";
+  setTimeout(()=>{go(3);type()},2200);
+};
+
+/* typewriter */
+function type(){
+  const t=fill(CONFIG.letter);let i=0;$("typed").textContent="";
+  if(!t.length){$("next3").style.display="inline-block";return}
+  const iv=setInterval(()=>{ $("typed").textContent+=t[i++]; if(i>=t.length){clearInterval(iv);$("next3").style.display="inline-block"} },45);
+}
+$("next3").onclick=()=>go(4);
+
+/* reasons */
+CONFIG.reasons.forEach(r=>{
+  const d=document.createElement("div");d.className="card";
+  d.innerHTML=`<div class="in"><div class="f">💗</div><div class="b">${r}</div></div>`;
+  d.onclick=()=>d.classList.toggle("flip"); $("cards").appendChild(d);
+});
+$("next4").onclick=()=>go(5);
+
+/* gallery */
+CONFIG.photos.forEach((p,i)=>{
+  const d=document.createElement("div");d.className="ph";d.style.setProperty("--r",((i%2?1:-1)*(1+Math.random()*2))+"deg");
+  const img=new Image();img.src=p;img.alt="memory";
+  img.onerror=()=>{d.textContent="💞";img.remove()};
+  d.appendChild(img);$("gallery").appendChild(d);
+});
+$("next5").onclick=()=>{go(6);burst(250)};
+$("again").onclick=()=>burst(300);
+</script>
+</body>
+</html>

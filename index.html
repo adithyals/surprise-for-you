@@ -99,7 +99,7 @@ button.btn.ghost{background:rgba(255,252,249,.85);color:var(--accent);border:1px
 
 /* letter */
 .letter{width:100%;max-width:560px;font-size:1.05rem;line-height:1.8;text-align:left;cursor:pointer;filter:drop-shadow(0 12px 18px rgba(80,50,30,.18))}
-.letter .nt,.letter .nb{display:block;width:100%;height:auto}.letter .nt{margin-bottom:-1px}.letter .nb{margin-top:-1px}
+.letter .ins{height:1.25em;width:auto;vertical-align:-.3em;margin-left:.2em;position:static;filter:drop-shadow(0 2px 3px rgba(80,50,30,.25))}.letter .nt,.letter .nb{display:block;width:100%;height:auto}.letter .nt{margin-bottom:-1px}.letter .nb{margin-top:-1px}
 .letter .nm{background:url(images/note_mid.png) top center/100% auto repeat-y;padding:0 13% 0 14%;white-space:pre-wrap;color:#4a3328}
 .cursor{display:inline-block;width:2px;background:var(--accent);margin-left:2px;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:0}}
@@ -265,7 +265,7 @@ const CONFIG = {
   yourName: "Your Name",       // your name
   song: "",                    // optional music: put an mp3 next to index.html and write its name, e.g. "song.mp3"
   letter:
-`Once again, Happy Birthday, Rashmitha! ❤️🎂
+`Once again, Happy Birthday, Rashmitha! {{heart}}{{cake}}
 
 I hope your special day is filled with endless smiles, beautiful surprises, and all the happiness your heart deserves.
 
@@ -370,14 +370,18 @@ $("next2").onclick=()=>{ go(3); type(); };
 
 /* typewriter */
 let typeIv=null,letterDone=false;
+const STK={heart:'<img class="ins" src="images/heart.png" alt="">',cake:'<img class="ins" src="images/cake.png" alt="">'};
+const esc=x=>x.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const units=t=>t.match(/\{\{(?:heart|cake)\}\}|[\s\S]/gu)||[];
+const html=u=>u.map(x=>x.startsWith("{{")?STK[x.slice(2,-2)]:esc(x)).join("");
 function type(){
   clearInterval(typeIv);
-  const t=fill(CONFIG.letter);
-  const show=()=>{clearInterval(typeIv);letterDone=true;$("typed").textContent=t;$("next3").style.display="inline-block"};
+  const u=units(fill(CONFIG.letter));
+  const show=()=>{clearInterval(typeIv);letterDone=true;$("typed").innerHTML=html(u);$("next3").style.display="inline-block"};
   document.querySelector(".letter").onclick=show;
-  if(letterDone||!t.length){show();return}
-  const chars=Array.from(t);let i=0;$("typed").textContent="";
-  typeIv=setInterval(()=>{ $("typed").textContent+=chars[i++]; if(i>=chars.length) show() },22);
+  if(letterDone||!u.length){show();return}
+  let i=0;$("typed").innerHTML="";
+  typeIv=setInterval(()=>{ i++; $("typed").innerHTML=html(u.slice(0,i)); if(i>=u.length) show() },22);
 }
 $("next3").onclick=()=>go(4);
 

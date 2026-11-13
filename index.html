@@ -52,9 +52,11 @@ button.btn:hover{transform:scale(1.07)}
 @keyframes envopen{0%{transform:scale(1)}18%{transform:scale(1.15) rotate(-10deg)}36%{transform:scale(1.2) rotate(10deg)}54%{transform:scale(1.3) rotate(-5deg)}100%{transform:scale(3.2) translateY(-30px);opacity:0}}
 #s1 p.sub{animation:hint 2.4s ease-in-out infinite}
 @keyframes hint{50%{opacity:.45}}
-.mini-env{width:34px;height:auto;vertical-align:middle;margin-left:6px;position:relative;top:-1px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.mini-env{width:28px;height:auto;vertical-align:middle;margin-left:6px;position:relative;top:-1px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
 @media(prefers-reduced-motion:reduce){.env,.env-wrap::before,#s1 p.sub{animation:none}.env.opening{animation:none;opacity:0}}
 .bear{height:1.05em;width:auto;vertical-align:-.2em;margin-left:.08em;filter:drop-shadow(0 3px 5px rgba(120,60,60,.25))}
+.nav{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:28px}
+button.btn.ghost{background:rgba(255,252,249,.85);color:var(--accent);border:1px solid rgba(142,34,50,.3);box-shadow:0 4px 14px rgba(106,21,36,.14)}
 /* ===== POSTER PAGE ===== */
 #s2{padding:16px}
 .poster{position:relative;width:min(100%,440px);height:min(calc(100vh - 32px),800px);border-radius:28px;overflow:hidden;background:#f3d6c3;box-shadow:0 25px 70px rgba(80,50,40,.35)}
@@ -86,11 +88,12 @@ button.btn:hover{transform:scale(1.07)}
 .stk.pl{right:0;top:34%;width:33%;opacity:.95;animation:bob 5s ease-in-out infinite}
 @keyframes flap{50%{transform:rotate(-6deg) translateY(-8px) scale(1.05)}}
 @keyframes bob{50%{transform:translateY(-10px) rotate(4deg)}}
-.ptext{position:absolute;left:0;right:0;bottom:5%;z-index:4;padding:0 10%}
+.ptext{position:absolute;left:0;right:0;bottom:5%;z-index:4;padding:0 7%}
 .happy{font-family:'Cinzel Decorative',serif;font-weight:700;color:var(--accent);font-size:clamp(1.1rem,5vw,1.5rem);letter-spacing:.06em;text-align:left;padding-left:4%}
 .bday{font-family:'Cinzel Decorative',serif;font-weight:900;color:var(--accent);font-size:clamp(2rem,11vw,3.1rem);line-height:1.05;letter-spacing:.01em;white-space:nowrap;text-align:center;text-shadow:0 2px 0 rgba(255,255,255,.7)}
 .pname{font-family:'Great Vibes','Dancing Script',cursive;font-weight:400;color:var(--accent);font-size:clamp(2.2rem,10vw,3.1rem);text-align:right;padding-right:4%;margin-top:2px}
-.pbtn{margin-top:14px;padding:11px 28px;font-size:1rem}
+.pbtn{margin-top:0;padding:10px 18px;font-size:.95rem;white-space:nowrap}
+.ptext .nav{margin-top:14px;flex-wrap:nowrap;gap:10px}
 
 /* letter */
 .letter{max-width:640px;background:rgba(255,252,249,.8);backdrop-filter:blur(8px);border:1px solid rgba(142,34,50,.22);border-radius:22px;padding:34px 28px;font-size:1.15rem;line-height:1.85;text-align:left;min-height:260px;white-space:pre-wrap;cursor:pointer;box-shadow:0 14px 40px rgba(106,21,36,.1)}
@@ -212,7 +215,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
       <div class="happy">Happy</div>
       <div class="bday">BIRTHDAY</div>
       <div class="pname" id="pname">Gurl</div>
-      <button class="btn pbtn" id="next2">Continue <img class="mini-env" src="images/envelope.png" alt="" onerror="this.replaceWith('💌')"></button>
+      <div class="nav"><button class="btn ghost pbtn" id="back2">← Back</button><button class="btn pbtn" id="next2">Continue <img class="mini-env" src="images/envelope.png" alt="" onerror="this.replaceWith('💌')"></button></div>
     </div>
   </div>
 </section>
@@ -221,7 +224,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 <section id="s3">
   <h2>A little note for you 💌</h2>
   <div class="letter"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
-  <button class="btn" id="next3" style="margin-top:28px;display:none">Keep going →</button>
+  <div class="nav"><button class="btn ghost" id="back3">← Back</button><button class="btn" id="next3" style="display:none">Keep going →</button></div>
 </section>
 
 <!-- 4. REASONS -->
@@ -229,14 +232,14 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
   <h2>Reasons that make you a great human being</h2>
   <p class="sub">Tap each card to flip it.</p>
   <div class="cards" id="cards"></div>
-  <button class="btn" id="next4" style="margin-top:30px">Next →</button>
+  <div class="nav"><button class="btn ghost" id="back4">← Back</button><button class="btn" id="next4">Next →</button></div>
 </section>
 
 <!-- 5. GALLERY -->
 <section id="s5">
   <h2>Little moments 📸</h2>
   <div class="gallery" id="gallery"></div>
-  <button class="btn" id="next5" style="margin-top:30px">One last thing →</button>
+  <div class="nav"><button class="btn ghost" id="back5">← Back</button><button class="btn" id="next5">One last thing →</button></div>
 </section>
 
 <!-- 6. FINAL -->
@@ -244,7 +247,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
   <img class="cat" src="images/cat.png" alt="A kitten in a party hat holding a cake and tulips">
   <h1 id="finalTitle">Happy Birthday!</h1>
   <p class="final script" id="finalMsg"></p>
-  <button class="btn" id="again" style="margin-top:30px">🎉 More confetti</button>
+  <div class="nav"><button class="btn ghost" id="back6">← Back</button><button class="btn" id="again">🎉 More confetti</button></div>
 </section>
 
 <audio id="song" loop preload="auto"></audio>
@@ -364,15 +367,25 @@ bindOpen();
 $("next2").onclick=()=>{ go(3); type(); };
 
 /* typewriter */
+let typeIv=null,letterDone=false;
 function type(){
-  const t=fill(CONFIG.letter);let i=0;$("typed").textContent="";
-  if(!t.length){$("next3").style.display="inline-block";return}
-  const chars=Array.from(t);
-  const finish=()=>{clearInterval(iv);$("typed").textContent=t;$("next3").style.display="inline-block"};
-  const iv=setInterval(()=>{ $("typed").textContent+=chars[i++]; if(i>=chars.length) finish() },22);
-  document.querySelector(".letter").onclick=finish;
+  clearInterval(typeIv);
+  const t=fill(CONFIG.letter);
+  const show=()=>{clearInterval(typeIv);letterDone=true;$("typed").textContent=t;$("next3").style.display="inline-block"};
+  document.querySelector(".letter").onclick=show;
+  if(letterDone||!t.length){show();return}
+  const chars=Array.from(t);let i=0;$("typed").textContent="";
+  typeIv=setInterval(()=>{ $("typed").textContent+=chars[i++]; if(i>=chars.length) show() },22);
 }
 $("next3").onclick=()=>go(4);
+
+/* back buttons */
+function resetEnvelope(){ $("open").classList.remove("opening"); document.querySelector(".env-wrap").classList.remove("opening"); opening=false; }
+$("back2").onclick=()=>{ resetEnvelope(); go(1); };
+$("back3").onclick=()=>go(2);
+$("back4").onclick=()=>go(3);
+$("back5").onclick=()=>go(4);
+$("back6").onclick=()=>go(5);
 
 /* reasons */
 CONFIG.reasons.forEach(r=>{

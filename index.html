@@ -391,7 +391,7 @@ $("back6").onclick=()=>go(5);
 /* reasons */
 CONFIG.reasons.forEach(r=>{
   const d=document.createElement("div");d.className="card";
-  d.innerHTML=`<div class="in"><div class="f"><div><div class="fe">🌸</div><div class="ft">${r.t}</div></div></div><div class="b"><div class="bt">${r.d}</div></div></div>`;
+  d.innerHTML=`<div class="in"><div class="f"><div><div class="fe">🌸</div></div></div><div class="b"><div class="bt">${r.d}</div></div></div>`;
   d.onclick=()=>d.classList.toggle("flip"); $("cards").appendChild(d);
 });
 $("next4").onclick=()=>go(5);

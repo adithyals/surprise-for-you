@@ -103,12 +103,12 @@ button.btn.ghost{background:rgba(255,252,249,.85);color:var(--accent);border:1px
 @keyframes blink{50%{opacity:0}}
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:900px;width:100%}
-.card{height:280px;perspective:800px;cursor:pointer}
+.card{height:340px;perspective:800px;cursor:pointer}
 .card .in{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d}
 .card.flip .in{transform:rotateY(180deg)}
 .card .f,.card .b{position:absolute;inset:0;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:18px;backface-visibility:hidden}
 .card .fe{font-size:2.2rem;margin-bottom:10px}.card .ft{font-family:'Great Vibes',cursive;font-size:1.9rem;line-height:1.2;color:#fff}.card .bh{font-family:'Great Vibes',cursive;font-size:1.7rem;line-height:1.2;color:var(--accent);margin-bottom:8px}.card .bt{max-height:100%;overflow:auto}.card .f{text-align:center;background:linear-gradient(135deg,#c4495d,#8e2232);font-size:2.4rem;box-shadow:0 10px 26px rgba(106,21,36,.25)}
-.card .b{background:#fff;border:2px solid var(--accent);transform:rotateY(180deg);font-size:.95rem;line-height:1.55;color:var(--ink)}
+.card .b{background:#efe3d0 url(images/tag.jpg) 25% center/cover no-repeat;border:0;box-shadow:0 10px 24px rgba(80,50,30,.25);padding:84px 22px 28px 64px;transform:rotateY(180deg);font-size:.95rem;line-height:1.55;color:var(--ink)}
 /* gallery */
 .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;max-width:960px;width:100%}
 .ph{aspect-ratio:3/4;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#f6cfb2,#e7a58c);display:flex;align-items:center;justify-content:center;font-size:3rem;border:6px solid #fff;box-shadow:0 10px 30px rgba(80,50,40,.25);transform:rotate(var(--r))}
@@ -284,7 +284,6 @@ Once again, a very Happy Birthday! 🥳✨`,
     {t:"Your soft-hearted nature", d:"You sometimes try to act like a rude person, but deep down, you're such a soft-hearted person. That's something I've observed about you, and honestly, it's one of the sweetest things about your character."},
     {t:"Your emotional maturity", d:"Before making decisions, you think about the future and consider how your choices might affect others. You don't simply give someone false hope when you're unsure. You prefer being genuine and honest, and that's something I truly admire about you."},
     {t:"The positive vibes in our conversations", d:"Talking with you always brings a different kind of positivity. Even an ordinary conversation with you can make the day feel a little better."},
-    {t:"Your patience and understanding", d:"Sometimes I know I test your patience, but the way you handle those situations is genuinely admirable. You stay calm and handle things with so much maturity. Patience and understanding are beautiful qualities, and you carry them so naturally. That's another thing I truly appreciate about you."},
     {t:"Your amazing talent", d:"You are genuinely talented, especially when it comes to dance. I don't know whether you plan to continue pursuing dance as a career or not, but whatever path you choose, I'll always be cheering for you. No matter where life takes you, I'll always be your biggest fan. Keep believing in yourself."}
   ],
   // put photos in an "images" folder and list them here, e.g. "images/1.jpg"

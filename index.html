@@ -98,7 +98,9 @@ button.btn.ghost{background:rgba(255,252,249,.85);color:var(--accent);border:1px
 .ptext .nav{margin-top:14px;flex-wrap:nowrap;gap:10px}
 
 /* letter */
-.letter{max-width:640px;background:rgba(255,252,249,.8);backdrop-filter:blur(8px);border:1px solid rgba(142,34,50,.22);border-radius:22px;padding:34px 28px;font-size:1.15rem;line-height:1.85;text-align:left;min-height:260px;white-space:pre-wrap;cursor:pointer;box-shadow:0 14px 40px rgba(106,21,36,.1)}
+.letter{width:100%;max-width:560px;font-size:1.05rem;line-height:1.8;text-align:left;cursor:pointer;filter:drop-shadow(0 12px 18px rgba(80,50,30,.18))}
+.letter .nt,.letter .nb{display:block;width:100%;height:auto}.letter .nt{margin-bottom:-1px}.letter .nb{margin-top:-1px}
+.letter .nm{background:url(images/note_mid.png) top center/100% auto repeat-y;padding:0 13% 0 14%;white-space:pre-wrap;color:#4a3328}
 .cursor{display:inline-block;width:2px;background:var(--accent);margin-left:2px;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:0}}
 /* cards */
@@ -222,7 +224,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 <!-- 3. LETTER -->
 <section id="s3">
   <h2>A little note for you <img class="h-env" src="images/envelope.png" alt="" onerror="this.replaceWith('💌')"></h2>
-  <div class="letter"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
+  <div class="letter"><img class="nt" src="images/note_top.png" alt=""><div class="nm"><span id="typed"></span><span class="cursor">&nbsp;</span></div><img class="nb" src="images/note_bot.png" alt=""></div>
   <div class="nav"><button class="btn ghost" id="back3">← Back</button><button class="btn" id="next3" style="display:none">Keep going →</button></div>
 </section>
 

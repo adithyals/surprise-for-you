@@ -57,6 +57,7 @@ button.btn:hover{transform:scale(1.07)}
 .bear{height:1.05em;width:auto;vertical-align:-.2em;margin-left:.08em;filter:drop-shadow(0 3px 5px rgba(120,60,60,.25))}
 .nav{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:28px}
 button.btn.ghost{background:rgba(255,252,249,.85);color:var(--accent);border:1px solid rgba(142,34,50,.3);box-shadow:0 4px 14px rgba(106,21,36,.14)}
+.h-env{height:.95em;width:auto;vertical-align:-.14em;margin-left:.08em;filter:drop-shadow(0 3px 5px rgba(120,60,60,.28))}
 /* ===== POSTER PAGE ===== */
 #s2{padding:16px}
 .poster{position:relative;width:min(100%,440px);height:min(calc(100vh - 32px),800px);border-radius:28px;overflow:hidden;background:#f3d6c3;box-shadow:0 25px 70px rgba(80,50,40,.35)}
@@ -215,7 +216,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 
 <!-- 3. LETTER -->
 <section id="s3">
-  <h2>A little note for you 💌</h2>
+  <h2>A little note for you <img class="h-env" src="images/envelope.png" alt="" onerror="this.replaceWith('💌')"></h2>
   <div class="letter"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
   <div class="nav"><button class="btn ghost" id="back3">← Back</button><button class="btn" id="next3" style="display:none">Keep going →</button></div>
 </section>

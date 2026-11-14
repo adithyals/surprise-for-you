@@ -153,6 +153,11 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 @media(max-width:600px){section{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}}
 @media(max-width:360px){h1,h2{font-size:clamp(1.7rem,9vw,2.2rem)!important}.pbtn{padding:10px 14px;font-size:.9rem}}
 @media(max-height:560px) and (orientation:landscape){#s2{padding:0}#s2{justify-content:flex-start}.poster{width:min(100%,440px);height:640px;border-radius:0}section:not(#s2){padding-top:70px;padding-bottom:70px}}
+
+/* poster v4: keep the image's true 9:16 proportions on every screen (no stretching) */
+#s2{padding:0;background:#636f58;justify-content:center}
+.poster{width:min(100%,56.25vh);width:min(100%,56.25dvh);height:auto;aspect-ratio:9/16;max-width:none;border-radius:0;box-shadow:none;background-size:100% 100%}
+@media(max-height:560px) and (orientation:landscape){.poster{width:min(100%,440px);height:auto}}
 </style>
 </head>
 <body>

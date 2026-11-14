@@ -164,6 +164,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 .sheet .ptext{flex-direction:column;flex-wrap:nowrap;align-items:center;justify-content:center;row-gap:0}
 .sheet .bdt{display:block;width:100%;height:auto}
 .sheet .pname{color:#111;width:auto;margin-top:-2%;font-size:clamp(1.5rem,7vw,2.1rem);text-align:center;padding:0}
+.sheet .pnimg{display:block;height:clamp(1.3rem,6.6vw,2rem);width:auto;margin-top:-1%}
 </style>
 </head>
 <body>
@@ -257,7 +258,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
     <div class="sheet"><img class="her" src="images/her_cut.png" alt="">
       <div class="ptext">
         <img class="bdt" src="images/bday_text.png" alt="Happy Birthday">
-        <div class="pname" id="pname">Gurl</div>
+        <img class="pnimg" src="images/gurl.png" alt="Gurl"><div class="pname" id="pname" hidden>Gurl</div>
       </div>
     </div>
     <div class="nav pnav"><button class="btn ghost pbtn" id="back2">← Back</button><button class="btn pbtn" id="next2">Continue <img class="mini-env" src="images/envelope.png" alt="" onerror="this.replaceWith('💌')"></button></div>

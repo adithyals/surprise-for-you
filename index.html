@@ -102,7 +102,7 @@ button.btn.ghost{background:rgba(255,252,249,.85);color:var(--accent);border:1px
 .poster{background:#e9cdbf url(images/poster_bg.jpg) center/100% 100% no-repeat}
 .poster .pbg,.poster .dots,.poster .main,.poster .stk,.poster .fade{display:none}
 .sheet{position:absolute;left:0;top:12.6%;width:74.1%;height:78.3%;display:flex;flex-direction:column;align-items:center;padding:5.5% 5% 0;z-index:3}
-.sheet .her{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border:6px solid #fff;border-radius:4px;box-shadow:0 10px 24px rgba(70,40,30,.28);transform:rotate(-1.5deg);animation:pop 1.1s cubic-bezier(.2,1.3,.4,1) both}
+.sheet .her{width:100%;max-width:none;height:auto;margin:0 0 0 0;filter:drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(3px 3px 0 #fff) drop-shadow(-3px -3px 0 #fff) drop-shadow(3px -3px 0 #fff) drop-shadow(-3px 3px 0 #fff) drop-shadow(0 8px 14px rgba(70,40,30,.3));animation:pop 1.1s cubic-bezier(.2,1.3,.4,1) both}
 .sheet .ptext{position:static;padding:0;margin-top:4%;width:100%}
 .sheet .happy{padding-left:2%;font-size:clamp(.95rem,4.2vw,1.3rem)}
 .sheet .bday{font-size:clamp(1.45rem,7.4vw,2.2rem);text-shadow:none}
@@ -224,7 +224,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
       <ellipse cx="80" cy="58" rx="74" ry="19" fill="none" stroke="rgba(90,95,105,.55)" stroke-width="2" transform="rotate(-18 80 58)"/>
     </svg>
     <div class="fade"></div>
-    <div class="sheet"><img class="her" src="images/her.jpg" alt="">
+    <div class="sheet"><img class="her" src="images/her_cut.png" alt="">
       <div class="ptext">
         <div class="happy">Happy</div>
         <div class="bday">BIRTHDAY</div>

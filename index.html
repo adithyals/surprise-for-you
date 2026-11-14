@@ -182,6 +182,10 @@ p.sub{color:#e6d2cd;opacity:1}
 .letter{color:#4a3328}
 .card .b,.card .b .bt{color:#4a3a37}
 .card .bh{color:var(--accent)}
+#s1 h1,#s1 #introTitle{color:#8e2232;text-shadow:none}
+#s1 p.sub{color:#8e2232;font-weight:600;text-shadow:none}
+#s1 .txt{background:rgba(255,246,240,.93);border-radius:26px;padding:16px 18px;margin-top:14px;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:min(92vw,380px)}#s1 h1{white-space:nowrap;font-size:clamp(2rem,9vw,3.2rem)}
+#s1 .txt p.sub{margin:6px 0 0}
 </style>
 </head>
 <body>
@@ -247,8 +251,8 @@ p.sub{color:#e6d2cd;opacity:1}
 <!-- 1. INTRO -->
 <section id="s1" class="active">
   <div class="env-wrap"><img class="env" id="open" src="images/envelope.png" alt="Sealed envelope. Tap to open" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'heart-big',id:'open',textContent:'💌'}));bindOpen()"></div>
-  <h1 id="introTitle">Hey 😊</h1>
-  <p class="sub">I made something special for you. Tap the envelope to open it.</p>
+  <div class="txt"><h1 id="introTitle">Hey 😊</h1>
+  <p class="sub">I made something special for you. Tap the envelope to open it.</p></div>
 </section>
 
 <!-- 2. BIRTHDAY POSTER -->

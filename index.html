@@ -158,6 +158,12 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 #s2{padding:0;background:#636f58;justify-content:center}
 .poster{width:min(100%,56.25vh);width:min(100%,56.25dvh);height:auto;aspect-ratio:9/16;max-width:none;border-radius:0;box-shadow:none;background-size:100% 100%}
 @media(max-height:560px) and (orientation:landscape){.poster{width:min(100%,440px);height:auto}}
+
+/* poster v5: calligraphy lettering image + black script name */
+.sheet{left:20%;width:44%;top:73.2%;height:14%}
+.sheet .ptext{flex-direction:column;flex-wrap:nowrap;align-items:center;justify-content:center;row-gap:0}
+.sheet .bdt{display:block;width:100%;height:auto}
+.sheet .pname{color:#111;width:auto;margin-top:-2%;font-size:clamp(1.5rem,7vw,2.1rem);text-align:center;padding:0}
 </style>
 </head>
 <body>
@@ -250,8 +256,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
     <div class="fade"></div>
     <div class="sheet"><img class="her" src="images/her_cut.png" alt="">
       <div class="ptext">
-        <div class="happy">Happy</div>
-        <div class="bday">BIRTHDAY</div>
+        <img class="bdt" src="images/bday_text.png" alt="Happy Birthday">
         <div class="pname" id="pname">Gurl</div>
       </div>
     </div>

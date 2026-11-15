@@ -194,6 +194,20 @@ section.active.reveal{animation:none}
 section.reveal .poster{animation:posterIn 1.2s cubic-bezier(.2,.9,.25,1.1) both}
 section.reveal .pnav{animation:fade 1s .6s ease both}
 @keyframes posterIn{0%{opacity:0;transform:scale(.4) rotate(-8deg) translateY(40px);filter:blur(8px)}55%{opacity:1;transform:scale(1.05) rotate(1.5deg);filter:blur(0)}80%{transform:scale(.99) rotate(-.5deg)}100%{transform:none}}
+/* envelope really opens: flap flips up, letter rises out */
+.env.base{animation:none;clip-path:polygon(2% 23%,54% 49%,99% 63%,99% 100%,0 100%);transform:none}
+.env.flap{position:absolute;left:0;top:0;z-index:3;animation:none;clip-path:polygon(2% 23%,81% 1%,99% 63%,54% 49%);transform-origin:50% 49%;pointer-events:none;filter:none}
+.env-wrap.unwrap::before{animation:none;opacity:.9}
+.env-wrap.unwrap .env.flap{animation:flapOpen .55s .1s ease-in forwards}
+@keyframes flapOpen{0%{transform:rotateX(0);opacity:1}60%{opacity:1}100%{transform:rotateX(-170deg) translateY(4px);opacity:0}}
+.env-wrap .letter{position:absolute;left:11%;right:11%;top:18%;height:70%;z-index:0;border-radius:6px;background:linear-gradient(#fffaf5,#fbe9e2);box-shadow:0 2px 10px rgba(120,40,60,.25);display:flex;align-items:center;justify-content:center;font-size:clamp(18px,6vw,26px);transform-origin:50% 100%;opacity:0}
+.env-wrap .letter i{position:absolute;left:14%;right:14%;height:2px;border-radius:2px;background:rgba(142,34,50,.18)}
+.env-wrap .letter i:nth-of-type(1){top:16%}.env-wrap .letter i:nth-of-type(2){top:28%;right:34%}.env-wrap .letter i:nth-of-type(3){bottom:16%;right:40%}
+.env-wrap.unwrap .letter{animation:letterOut 1.7s .55s cubic-bezier(.45,0,.2,1) forwards}
+@keyframes letterOut{0%{opacity:1;transform:translateY(0) scale(1)}35%{opacity:1;transform:translateY(-62%) scale(1)}60%{opacity:1;transform:translateY(-62%) scale(1.05) rotate(-2deg)}100%{opacity:1;transform:translateY(-70%) scale(14) rotate(0);z-index:5}}
+.env-wrap.unwrap .env.base{animation:baseShake .5s ease forwards,baseFade .5s 1.3s ease forwards}
+@keyframes baseShake{0%,100%{transform:none}25%{transform:rotate(-4deg) scale(1.08)}60%{transform:rotate(3deg) scale(1.1)}}
+@keyframes baseFade{to{opacity:0}}
 </style>
 </head>
 <body>
@@ -433,10 +447,14 @@ let opening=false;
 function bindOpen(){ $("open").onclick=()=>{
   if(opening) return; opening=true;
   if(CONFIG.song) song.play().catch(()=>{});
-  $("open").classList.add("opening"); document.querySelector(".env-wrap").classList.add("opening");
-  setTimeout(()=>burst(160),380);
-  setTimeout(()=>{const f=document.createElement("div");f.className="flash";document.body.appendChild(f);setTimeout(()=>f.remove(),1100);},560);
-  setTimeout(()=>{go(2);const s=$("s2");s.classList.add("reveal");},820);
+  const w=document.querySelector(".env-wrap"),img=$("open");
+  const letter=document.createElement("div");letter.className="letter";letter.innerHTML="<span>💌</span><i></i><i></i><i></i>";
+  const flap=img.cloneNode();flap.removeAttribute("id");flap.className="env flap";flap.onclick=null;flap.removeAttribute("onerror");
+  w.insertBefore(letter,img);w.appendChild(flap);
+  img.classList.add("base");w.classList.add("unwrap");
+  setTimeout(()=>burst(120),700);
+  setTimeout(()=>{const f=document.createElement("div");f.className="flash";document.body.appendChild(f);setTimeout(()=>f.remove(),1100);},1500);
+  setTimeout(()=>{go(2);$("s2").classList.add("reveal");},1800);
 }; }
 bindOpen();
 $("next2").onclick=()=>{ go(3); type(); };
@@ -459,7 +477,7 @@ function type(){
 $("next3").onclick=()=>go(4);
 
 /* back buttons */
-function resetEnvelope(){ $("open").classList.remove("opening"); document.querySelector(".env-wrap").classList.remove("opening"); opening=false; }
+function resetEnvelope(){ const w=document.querySelector(".env-wrap"); w.classList.remove("unwrap"); $("open").classList.remove("base"); w.querySelectorAll(".letter,.flap").forEach(e=>e.remove()); opening=false; }
 $("back2").onclick=()=>{ resetEnvelope(); go(1); };
 $("back3").onclick=()=>go(2);
 $("back4").onclick=()=>go(3);

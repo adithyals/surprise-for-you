@@ -171,22 +171,18 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
 .poster{width:min(100%,calc((100vh - 32px)*.5625),440px);width:min(100%,calc((100dvh - 32px)*.5625),440px);border-radius:22px;box-shadow:0 20px 50px rgba(106,21,36,.22)}
 @media(max-height:560px) and (orientation:landscape){.poster{width:min(100%,440px)}}
 /* cherry-blossom page background for every page */
-body{background:#fbeee8}
-body::before{content:"";position:fixed;inset:0;z-index:0;background:#fbeee8 url(images/page_bg.jpg) center/cover no-repeat;pointer-events:none}
+body{background:#fbe9e6}
+body::before{content:"";position:fixed;inset:0;z-index:0;background:#fbe9e6 url(images/page_bg.jpg) center/cover no-repeat;pointer-events:none}
 .d.tl,.d.bl,.d.bow,.d.bln,.d.cake{display:none}
 .float{display:none!important}
 /* poster v7: green card fits the white rounded frame of the background image */
-body:has(#s2.active)::before{display:none}
 #s2{padding:0}
-.stage2{position:relative;width:min(100vw,calc(100vh*.5625));width:min(100vw,calc(100dvh*.5625));aspect-ratio:9/16;background:url(images/page_bg.jpg) 0 0/100% 100% no-repeat}
+.stage2{position:relative;width:min(100vw,calc(100vh*.5625));width:min(100vw,calc(100dvh*.5625));aspect-ratio:9/16}
 .stage2 .poster{position:absolute;left:6%;top:8.6%;width:88%;height:80%;aspect-ratio:auto;max-width:none;background-size:100% 100%;border-radius:clamp(14px,5.2vw,26px);box-shadow:0 10px 26px rgba(150,80,80,.22);overflow:hidden}
 .stage2 .sheet{left:21%;top:75.9%;width:40%;height:14.3%}
 .stage2 .poster{overflow:visible}.stage2 .pnav{bottom:auto;top:calc(100% + 1%);padding:0;margin:0}.stage2 .pbtn{padding:9px 16px;font-size:.92rem}
 @media(max-height:560px) and (orientation:landscape){.stage2{width:min(100%,440px)}}
 /* poster v8: background image fades softly into the page colour so there is no second pink layer / seam */
-#s2{background:none}
-.stage2{background:none}
-.stage2::before{content:"";position:absolute;inset:0;z-index:0;background:url(images/page_bg.jpg) 0 0/100% 100% no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);mask-composite:intersect}
 </style>
 </head>
 <body>

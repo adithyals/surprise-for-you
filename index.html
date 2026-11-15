@@ -211,6 +211,21 @@ section.reveal .pnav{animation:fade 1s .6s ease both}
 .env-wrap.unwrap .env.base{animation:baseShake .5s ease forwards,baseFade .5s 1.4s ease forwards}
 @keyframes baseShake{0%,100%{transform:none}25%{transform:rotate(-4deg) scale(1.08)}60%{transform:rotate(3deg) scale(1.1)}}
 @keyframes baseFade{to{opacity:0}}
+/* tri-fold letter */
+.ltr{position:fixed;left:0;top:0;z-index:70;perspective:1700px;pointer-events:none;transform-origin:50% 50%}
+.ltr .p{position:absolute;left:0;width:100%;transform-style:preserve-3d}
+.ltr .pA{transform:translateZ(2px) rotateX(-180deg);transform-origin:50% 100%}
+.ltr .pC{transform:translateZ(-2px) rotateX(-180deg);transform-origin:50% 0}
+.ltr .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.ltr .back{transform:rotateX(180deg)}
+.ltr .paper{background:linear-gradient(#fffaf5,#fbe9e2);display:flex;align-items:center;justify-content:center;font-size:clamp(28px,12vw,64px);box-shadow:inset 0 0 0 1px rgba(142,34,50,.08)}
+.ltr .paper b{position:absolute;left:14%;height:3px;border-radius:3px;background:rgba(142,34,50,.16)}
+.ltr .paper b:nth-of-type(1){top:16%;right:14%}.ltr .paper b:nth-of-type(2){top:27%;right:38%}.ltr .paper b:nth-of-type(3){bottom:16%;right:46%}
+.ltr .sh{position:absolute;inset:0;background:linear-gradient(rgba(120,50,70,.26),rgba(120,50,70,.06));opacity:.5;pointer-events:none}
+.ltr .face{box-shadow:0 0 18px rgba(90,30,45,.25)}
+section.reveal .poster{animation:ink 1.5s cubic-bezier(.3,.6,.2,1) both}
+@keyframes ink{0%{opacity:0;clip-path:inset(0 -60px 100% -60px)}25%{opacity:1}100%{opacity:1;clip-path:inset(-60px -60px -60px -60px)}}
+@media(prefers-reduced-motion:reduce){.ltr *{animation:none!important}}
 </style>
 </head>
 <body>
@@ -456,16 +471,10 @@ function bindOpen(){ $("open").onclick=()=>{
   w.insertBefore(letter,img);w.appendChild(flap);
   img.classList.add("base");w.classList.add("unwrap");
   setTimeout(()=>burst(120),700);
-  setTimeout(()=>{
-    const r=letter.getBoundingClientRect();
-    const o=document.createElement("div");o.className="sheetopen";document.body.appendChild(o);
-    letter.style.visibility="hidden";
-    o.style.cssText+=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;`;
-    o.getBoundingClientRect();
-    o.style.transition="all .85s cubic-bezier(.5,0,.15,1)";
-    o.style.left=o.style.top="0px";o.style.width="100vw";o.style.height="100dvh";o.style.borderRadius="0";
-    setTimeout(()=>{go(2);$("s2").classList.add("reveal");o.style.transition="opacity .6s ease .15s";o.style.opacity="0";setTimeout(()=>o.remove(),900);},880);
-  },1350);
+  /* make the small letter the same proportions as a tri-fold panel */
+  {const W=document.documentElement.clientWidth,H=innerHeight,ew=img.getBoundingClientRect().width,lw=ew*.78,lh=lw*H/(3*W);
+   letter.style.cssText+=`left:${(ew-lw)/2}px;right:auto;width:${lw}px;height:${lh}px;top:${ew*.2}px;`;}
+  setTimeout(()=>unfoldLetter(letter),1350);
 }; }
 bindOpen();
 $("next2").onclick=()=>{ go(3); type(); };
@@ -488,7 +497,31 @@ function type(){
 $("next3").onclick=()=>go(4);
 
 /* back buttons */
-function resetEnvelope(){ const w=document.querySelector(".env-wrap"); w.classList.remove("unwrap"); $("open").classList.remove("base"); w.querySelectorAll(".letter,.flap").forEach(e=>e.remove()); opening=false; }
+
+/* folded letter: hand over from the small letter in the envelope to a full-size tri-fold letter that unfolds into page 2 */
+function unfoldLetter(small){
+  const W=document.documentElement.clientWidth,H=innerHeight,P=H/3,r=small.getBoundingClientRect();
+  const sc=Math.max(W/720,H/1080),dw=720*sc,dh=1080*sc,ox=(W-dw)/2,oy=(H-dh)/2;
+  const bg=k=>`background:#fbe9e6 url(images/page_bg.jpg) ${ox}px ${oy-k*P}px/${dw}px ${dh}px no-repeat`;
+  const L=document.createElement("div");L.className="ltr";L.style.cssText=`width:${W}px;height:${H}px`;
+  L.innerHTML=`<div class="p pB" style="top:${P}px;height:${P}px"><div class="face" style="${bg(1)}"><i class="sh"></i></div>
+    <div class="p pA" style="top:-${P}px;height:${P}px"><div class="face" style="${bg(0)}"><i class="sh"></i></div><div class="face back paper"><span>💌</span><b></b><b></b><b></b><i class="sh"></i></div></div>
+    <div class="p pC" style="top:${P}px;height:${P}px"><div class="face" style="${bg(2)}"><i class="sh"></i></div><div class="face back paper"><i class="sh"></i></div></div></div>`;
+  document.body.appendChild(L);
+  const cx=r.left+r.width/2-W/2,cy=r.top+r.height/2-H/2,s0=r.width/W;
+  const T0=`translate(${cx}px,${cy}px) scale(${s0})`,T1=`translate(0px,0px) scale(.8)`,T2="translate(0px,0px) scale(1)";
+  small.style.visibility="hidden";
+  const A=L.querySelector(".pA"),C=L.querySelector(".pC"),shA=A.querySelectorAll(".sh"),shC=C.querySelectorAll(".sh");
+  const o={fill:"both"},ez="cubic-bezier(.45,.05,.2,1)";
+  L.animate([{transform:T0},{transform:T1}],{...o,duration:700,easing:ez});
+  L.animate([{transform:T1},{transform:T2}],{...o,duration:1700,delay:700,easing:"ease-in-out"});
+  A.animate([{transform:"translateZ(2px) rotateX(-180deg)"},{transform:"translateZ(2px) rotateX(0deg)"}],{...o,duration:1100,delay:800,easing:ez});
+  C.animate([{transform:"translateZ(-2px) rotateX(-180deg)"},{transform:"translateZ(-2px) rotateX(0deg)"}],{...o,duration:1100,delay:1450,easing:ez});
+  shA.forEach(e=>e.animate([{opacity:.55},{opacity:.9,offset:.4},{opacity:0}],{...o,duration:1100,delay:800}));
+  shC.forEach(e=>e.animate([{opacity:.55},{opacity:.9,offset:.4},{opacity:0}],{...o,duration:1100,delay:1450}));
+  setTimeout(()=>{go(2);$("s2").classList.add("reveal");setTimeout(()=>L.remove(),60);},2600);
+}
+function resetEnvelope(){ const w=document.querySelector(".env-wrap"); w.classList.remove("unwrap"); $("open").classList.remove("base"); w.querySelectorAll(".letter,.flap").forEach(e=>e.remove()); document.querySelectorAll(".ltr").forEach(e=>e.remove()); opening=false; }
 $("back2").onclick=()=>{ resetEnvelope(); go(1); };
 $("back3").onclick=()=>go(2);
 $("back4").onclick=()=>go(3);

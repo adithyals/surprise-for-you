@@ -187,6 +187,8 @@ body::before{content:"";position:fixed;inset:0;z-index:0;background:#fbe9e6 url(
 button.btn,button.btn.ghost{background:#5b2155;color:#fff4ee;border:1px solid #431740;box-shadow:0 4px 14px rgba(67,23,64,.3)}
 .gallery .ph:only-child{aspect-ratio:1206/2140;width:min(62vw,250px);margin:0 auto}
 .gallery:has(.ph:only-child){display:flex;justify-content:center}
+.ph img{object-position:50% 22%}
+.gallery .ph:last-child:nth-child(odd):not(:only-child){grid-column:1/-1;width:calc(50% - 8px);justify-self:center}
 </style>
 </head>
 <body>
@@ -353,7 +355,7 @@ Stay happy, stay blessed, and keep being YOU! {{heart}}`,
     {t:"Amazing talent", d:"You are genuinely talented, especially when it comes to dance. I don't know whether you plan to continue pursuing dance as a career or not, but whatever path you choose, I'll always be cheering for you. No matter where life takes you, I'll always be your biggest fan. Keep believing in yourself."}
   ],
   // put photos in an "images" folder and list them here, e.g. "images/1.jpg"
-  photos: ["images/1.jpg"],
+  photos: ["images/1.jpg","images/2.jpg","images/3.jpg"],
   finalMessage: "Keep smiling, keep shining, and keep being YOU! 🎂"
 };
 /* ================================== */

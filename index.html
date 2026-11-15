@@ -185,6 +185,15 @@ body::before{content:"";position:fixed;inset:0;z-index:0;background:#fbe9e6 url(
 /* poster v8: background image fades softly into the page colour so there is no second pink layer / seam */
 /* swapped colours: burgundy buttons, light text */
 button.btn,button.btn.ghost{background:var(--accent);color:#fff4ee;border:1px solid var(--accent-d);box-shadow:0 4px 14px rgba(106,21,36,.25)}
+/* nicer envelope -> page 2 transition */
+.env.opening{animation:envopen2 .85s cubic-bezier(.5,0,.3,1) forwards}
+@keyframes envopen2{0%{transform:scale(1)}20%{transform:scale(.88) rotate(-4deg)}45%{transform:scale(1.18) translateY(-14px) rotate(3deg);filter:drop-shadow(0 0 22px #ffc6d6)}100%{transform:scale(3.6) translateY(-40px);opacity:0;filter:drop-shadow(0 0 40px #fff)}}
+.flash{position:fixed;inset:0;z-index:50;pointer-events:none;background:radial-gradient(circle at 50% 45%,#fff 0,rgba(255,225,235,.95) 30%,rgba(255,200,220,0) 70%);animation:flash 1s ease-out forwards}
+@keyframes flash{0%{opacity:0;transform:scale(.4)}25%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+section.active.reveal{animation:none}
+section.reveal .poster{animation:posterIn 1.2s cubic-bezier(.2,.9,.25,1.1) both}
+section.reveal .pnav{animation:fade 1s .6s ease both}
+@keyframes posterIn{0%{opacity:0;transform:scale(.4) rotate(-8deg) translateY(40px);filter:blur(8px)}55%{opacity:1;transform:scale(1.05) rotate(1.5deg);filter:blur(0)}80%{transform:scale(.99) rotate(-.5deg)}100%{transform:none}}
 </style>
 </head>
 <body>
@@ -358,7 +367,7 @@ Stay happy, stay blessed, and keep being YOU! {{heart}}`,
 
 const $ = id => document.getElementById(id);
 const fill = s => s.replaceAll("{her}",CONFIG.herName).replaceAll("{you}",CONFIG.yourName);
-const go = n => { document.querySelectorAll("section").forEach(s=>s.classList.remove("active")); $("s"+n).classList.add("active"); window.scrollTo(0,0); };
+const go = n => { $("s2").classList.remove("reveal"); document.querySelectorAll("section").forEach(s=>s.classList.remove("active")); $("s"+n).classList.add("active"); window.scrollTo(0,0); };
 
 $("introTitle").innerHTML = "Hey " + CONFIG.herName + ` <img class="bear" src="images/bear.png" alt="" onerror="this.replaceWith('😊')">`;
 $("pname").textContent = CONFIG.posterTag;
@@ -426,7 +435,8 @@ function bindOpen(){ $("open").onclick=()=>{
   if(CONFIG.song) song.play().catch(()=>{});
   $("open").classList.add("opening"); document.querySelector(".env-wrap").classList.add("opening");
   setTimeout(()=>burst(160),380);
-  setTimeout(()=>go(2),820);
+  setTimeout(()=>{const f=document.createElement("div");f.className="flash";document.body.appendChild(f);setTimeout(()=>f.remove(),1100);},560);
+  setTimeout(()=>{go(2);const s=$("s2");s.classList.add("reveal");},820);
 }; }
 bindOpen();
 $("next2").onclick=()=>{ go(3); type(); };

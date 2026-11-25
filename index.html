@@ -338,7 +338,7 @@ const CONFIG = {
   posterBg: ["images/bg1.jpg","images/bg2.jpg","images/bg3.jpg"],   // 3 photos shown blurred in the background
   herName: "Rashmitha",        // her name
   yourName: "Your Name",       // your name
-  song: "",                    // optional music: put an mp3 next to index.html and write its name, e.g. "song.mp3"
+  song: "fairy.mp3",                    // optional music: put an mp3 next to index.html and write its name, e.g. "song.mp3"
   letter:
 `Once again, Happy Birthday! {{hc}}
 
@@ -388,7 +388,7 @@ false&&setInterval(()=>{
 
 /* music */
 const song=$("song");
-if(CONFIG.song){ song.src=CONFIG.song; $("mute").style.display="block"; }
+if(CONFIG.song){ song.src=CONFIG.song; song.volume=.4; $("mute").style.display="block"; }
 $("mute").onclick=()=>{ if(song.paused){song.play();$("mute").textContent="🎵"} else {song.pause();$("mute").textContent="🔇"} };
 
 /* confetti */

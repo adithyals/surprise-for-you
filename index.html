@@ -456,7 +456,7 @@ function type(){
   if(letterDone||!u.length){show();return}
   /* time-based writing: steady speed, small pauses at punctuation, one DOM update per frame */
   const at=[];let t=0;
-  u.forEach(x=>{t+=/[.!?]/.test(x)?140:/[,:;]/.test(x)?70:x==="\n"?100:20;at.push(t)});
+  u.forEach(x=>{t+=/[.!?]/.test(x)?300:/[,:;]/.test(x)?150:x==="\n"?220:42;at.push(t)});
   T.innerHTML="";pen.style.display="inline-block";
   let n=0;const t0=performance.now();
   const tick=now=>{

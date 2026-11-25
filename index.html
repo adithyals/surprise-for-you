@@ -191,9 +191,9 @@ button.btn,button.btn.ghost{background:#5b2155;color:#fff4ee;border:1px solid #4
 .gallery .ph:last-child:nth-child(odd):not(:only-child){grid-column:1/-1;width:calc(50% - 8px);justify-self:center}
 /* handwritten note with a moving pen */
 .letter .nm{font-family:'Dancing Script','Segoe Script',cursive;font-weight:600;font-size:clamp(1.05rem,4.7vw,1.3rem);line-height:1.65;color:#3e2a4a;overflow-wrap:anywhere;word-break:normal}
-.ch{animation:ink .4s ease both}
-@keyframes ink{from{opacity:0;filter:blur(2px)}to{opacity:1;filter:none}}
-.cursor{width:auto!important;background:none!important;animation:penwrite .32s ease-in-out infinite alternate!important;display:none;transform-origin:15% 90%;font-size:1.25rem;line-height:1;margin-left:3px;vertical-align:-.15em}
+.ch{animation:ink .22s linear both}
+@keyframes ink{from{opacity:0}to{opacity:1}}
+.cursor{width:auto!important;background:none!important;animation:penwrite .4s ease-in-out infinite alternate!important;will-change:transform;display:none;transform-origin:15% 90%;font-size:1.25rem;line-height:1;margin-left:3px;vertical-align:-.15em}
 .cursor::before{content:"\1F58B\FE0F"}
 @keyframes penwrite{from{transform:rotate(-8deg) translate(0,0)}to{transform:rotate(6deg) translate(2px,-3px)}}
 </style>
@@ -449,21 +449,29 @@ const esc=x=>x.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const units=t=>t.match(/\{\{(?:heart|cake|hc)\}\}|[\s\S]/gu)||[];
 const html=u=>u.map(x=>x.startsWith("{{")?STK[x.slice(2,-2)]:esc(x)).join("");
 function type(){
-  clearTimeout(typeIv);
+  cancelAnimationFrame(typeIv);
   const u=units(fill(CONFIG.letter)),pen=document.querySelector(".cursor"),T=$("typed");
-  const show=()=>{clearTimeout(typeIv);letterDone=true;T.innerHTML=html(u);pen.style.display="none";$("next3").style.display="inline-block"};
+  const show=()=>{cancelAnimationFrame(typeIv);letterDone=true;T.innerHTML=html(u);pen.style.display="none";$("next3").style.display="inline-block"};
   document.querySelector(".letter").onclick=show;
   if(letterDone||!u.length){show();return}
-  let i=0;T.innerHTML="";pen.style.display="inline-block";
-  const step=()=>{
-    if(i>=u.length){show();return}
-    const x=u[i++];
-    if(x.startsWith("{{")){const d=document.createElement("span");d.className="ch";d.innerHTML=STK[x.slice(2,-2)];T.appendChild(d)}
-    else{const s=document.createElement("span");s.className="ch";s.textContent=x;T.appendChild(s)}
-    const pause=/[.!?]/.test(x)?260:/[,:;]/.test(x)?140:x==="\n"?220:0;
-    typeIv=setTimeout(step,34+Math.random()*26+pause);
+  /* time-based writing: steady speed, small pauses at punctuation, one DOM update per frame */
+  const at=[];let t=0;
+  u.forEach(x=>{t+=/[.!?]/.test(x)?140:/[,:;]/.test(x)?70:x==="\n"?100:20;at.push(t)});
+  T.innerHTML="";pen.style.display="inline-block";
+  let n=0;const t0=performance.now();
+  const tick=now=>{
+    const el=now-t0;let m=n;
+    while(m<u.length&&at[m]<=el)m++;
+    if(m>n){
+      const f=document.createDocumentFragment();
+      for(;n<m;n++){const x=u[n],s=document.createElement("span");s.className="ch";
+        if(x.startsWith("{{"))s.innerHTML=STK[x.slice(2,-2)];else s.textContent=x;f.appendChild(s)}
+      T.appendChild(f);
+    }
+    if(n>=u.length){show();return}
+    typeIv=requestAnimationFrame(tick);
   };
-  step();
+  typeIv=requestAnimationFrame(tick);
 }
 $("next3").onclick=()=>go(4);
 

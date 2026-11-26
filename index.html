@@ -196,6 +196,9 @@ button.btn,button.btn.ghost{background:#5b2155;color:#fff4ee;border:1px solid #4
 .cursor{width:auto!important;background:none!important;animation:penwrite .4s ease-in-out infinite alternate!important;will-change:transform;display:none;transform-origin:15% 90%;font-size:1.25rem;line-height:1;margin-left:3px;vertical-align:-.15em}
 .cursor::before{content:"\1F58B\FE0F"}
 @keyframes penwrite{from{transform:rotate(-8deg) translate(0,0)}to{transform:rotate(6deg) translate(2px,-3px)}}
+.ph{position:relative}
+.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 8px 9px;text-align:center;font-family:'Dancing Script','Segoe Script',cursive;font-weight:700;font-size:clamp(.95rem,4.2vw,1.15rem);line-height:1.15;color:#fff;background:linear-gradient(transparent,rgba(60,20,70,.78));text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.ph img[src$="4.jpg"]{object-position:50% 28%}
 </style>
 </head>
 <body>
@@ -362,7 +365,8 @@ Stay happy, stay blessed, and keep being YOU! {{heart}}`,
     {t:"Amazing talent", d:"You are genuinely talented, especially when it comes to dance. I don't know whether you plan to continue pursuing dance as a career or not, but whatever path you choose, I'll always be cheering for you. No matter where life takes you, I'll always be your biggest supporter. Keep believing in yourself."}
   ],
   // put photos in an "images" folder and list them here, e.g. "images/1.jpg"
-  photos: ["images/1.jpg","images/2.jpg","images/3.jpg"],
+  photos: ["images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg"],
+  captions: {"images/4.jpg":"This one is my personal favourite ❤️"},
   finalMessage: "Keep smiling, keep shining, and keep being YOU! 🎂"
 };
 /* ================================== */
@@ -496,7 +500,9 @@ CONFIG.photos.forEach((p,i)=>{
   const d=document.createElement("div");d.className="ph";d.style.setProperty("--r",((i%2?1:-1)*(1+Math.random()*2))+"deg");
   const img=new Image();img.src=p;img.alt="memory";
   img.onerror=()=>{d.textContent="🌸";img.remove()};
-  d.appendChild(img);$("gallery").appendChild(d);
+  d.appendChild(img);
+  const cap=CONFIG.captions&&CONFIG.captions[p];if(cap){const c=document.createElement("div");c.className="cap";c.textContent=cap;d.appendChild(c)}
+  $("gallery").appendChild(d);
 });
 $("next5").onclick=()=>{go(6);burst(250)};
 $("again").onclick=()=>burst(300);

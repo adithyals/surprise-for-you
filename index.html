@@ -393,7 +393,7 @@ false&&setInterval(()=>{
 
 /* music */
 const song=$("song");
-if(CONFIG.song){ song.src=CONFIG.song; song.volume=.4; $("mute").style.display="block"; }
+if(CONFIG.song){ song.src=CONFIG.song; song.volume=.7; $("mute").style.display="block"; }
 $("mute").onclick=()=>{ if(song.paused){song.play();$("mute").textContent="🎵"} else {song.pause();$("mute").textContent="🔇"} };
 
 /* confetti */
